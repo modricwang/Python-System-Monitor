@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import psutil
+import time
 
 
 def get_memory():
@@ -40,7 +41,7 @@ def flush():
         fig.canvas.flush_events()
     except NotImplementedError:
         pass
-    fig.canvas.start_event_loop(0.5)
+    fig.canvas.start_event_loop(1)
 
 
 # update values
@@ -53,6 +54,7 @@ def update():
     ax.text(1, m + 0.05, '%.0f' % m, ha='center', va='bottom', fontsize=15)
     ax.text(2, c + 0.05, '%.0f' % c, ha='center', va='bottom', fontsize=15)
     flush()
+    print(time.asctime(time.localtime(time.time())) + '\tMem: %d\t\tCPU: %d' % (m, c))
 
 
 while True:
